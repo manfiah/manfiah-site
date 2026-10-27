@@ -1,6 +1,6 @@
 ---
 title: "Hello, world: how this site was built"
-date: 2025-10-01
+date: 2026-09-10
 tags: [meta, cloudflare, tutorial]
 excerpt: "A zero-dependency static site, Cloudflare Pages and a custom domain — free, with automatic HTTPS."
 ---

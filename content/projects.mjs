@@ -1,57 +1,60 @@
 /**
  * ============================================================
- *  作品集数据 —— TODO 把下面的示例项目换成你自己的项目
+ *  摄影集 / 系列数据 —— TODO 换成你自己的照片系列
  * ============================================================
- *  每个项目支持这些字段：
- *    icon     图标：work / article / github / link / mail
- *    year     年份（数字）
- *    title    { zh: "中文名", en: "English name" }
- *    summary  { zh: "中文简介", en: "English summary" }
- *    tags     标签数组，例如 ["React", "TypeScript"]
- *    link     项目在线地址（没有就留空字符串）
- *    repo     源码地址（没有就留空字符串）
- *  link 和 repo 都留空时，卡片不可点击。
+ *  字段说明：
+ *    slug    系列标识（英文，用于未来链接）
+ *    year    年份
+ *    count   张数
+ *    title   { zh: "中文名", en: "English name" }
+ *    summary { zh: "中文描述", en: "English description" }
+ *    tags    标签数组
  * ============================================================
  */
 
 export const projects = [
   {
-    slug: "manfiah-win",
-    icon: "work",
-    year: 2025,
-    title: { zh: "个人网站 manfiah.win", en: "Personal site manfiah.win" },
+    slug: "sunset-and-car",
+    year: 2026,
+    count: 12,
+    title: { zh: "日落与车", en: "Sunset & Car" },
     summary: {
-      zh: "零依赖静态站点：Material Design 3 风格、中英双语、博客与评论，免费托管在 Cloudflare Pages 上。",
-      en: "A zero-dependency static site: Material Design 3 styling, bilingual content, blog and comments, hosted free on Cloudflare Pages.",
+      zh: "傍晚六点之后的车与光：金属、玻璃、还有退到背景里的山。",
+      en: "Cars and light after six: metal, glass, and mountains fading into the background.",
     },
-    tags: ["HTML", "CSS", "Node.js", "Cloudflare Pages"],
-    link: "https://manfiah.win",
-    repo: "",
+    tags: ["车", "日落", "胶片感"],
   },
   {
-    slug: "sample-project-two",
-    icon: "article",
-    year: 2025,
-    title: { zh: "示例项目二：写作与发布流程", en: "Sample project two: writing workflow" },
+    slug: "halls",
+    year: 2026,
+    count: 8,
+    title: { zh: "展馆", en: "Halls" },
     summary: {
-      zh: "用 Markdown 写文章、提交到 GitHub，网站自动重新构建并上线。这段文字是示例，请替换成你自己的项目。",
-      en: "Write in Markdown, push to GitHub, and the site rebuilds and redeploys itself. This is sample text — replace it with your own project.",
+      zh: "展厅里的车像被陈列的标本，安静、克制、有秩序。",
+      en: "Cars in a showroom feel like specimens: quiet, restrained, in order.",
     },
-    tags: ["Markdown", "GitHub", "CI"],
-    link: "",
-    repo: "",
+    tags: ["室内", "建筑", "光"],
   },
   {
-    slug: "sample-project-three",
-    icon: "github",
-    year: 2024,
-    title: { zh: "示例项目三：小工具 / 实验", en: "Sample project three: tool or experiment" },
+    slug: "roads",
+    year: 2025,
+    count: 16,
+    title: { zh: "公路", en: "Roads" },
     summary: {
-      zh: "这里可以放一个开源小工具、一次技术实验，或者任何你想展示的东西。",
-      en: "Put an open-source utility, a technical experiment, or anything else worth showing here.",
+      zh: "从一个目的地开往下一个目的地的途中，那些没打算拍下的画面。",
+      en: "The frames you never planned to take, on the way from one place to the next.",
     },
-    tags: ["Open Source"],
-    link: "",
-    repo: "",
+    tags: ["公路", "旅途", "风景"],
+  },
+  {
+    slug: "still",
+    year: 2025,
+    count: 6,
+    title: { zh: "静物", en: "Still" },
+    summary: {
+      zh: "钥匙、方向盘、后视镜上的一小块反光。",
+      en: "Keys, steering wheels, a small reflection on the mirror.",
+    },
+    tags: ["静物", "细节"],
   },
 ];

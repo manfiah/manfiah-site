@@ -1,27 +1,21 @@
-> Note: this is sample text. Replace it with your own introduction.
+> Note: this is placeholder copy. Replace it with your own words later.
 
-Hi, I'm **Manfiah**. I build things and write about them — this site is where I keep my work, notes and contact details.
+The Car Exhibition Hall is a place about **cars, light and space**.
 
-## What I do
+## What lives here
 
-Two things, mostly:
+- **Cars**: classics and everyday cars, arranged by light and by era.
+- **Light**: late afternoons, rainy days, the lamps inside a showroom — anything that makes metal look soft.
+- **Space**: halls, garages, highways, and the way cars sit inside them.
 
-- **Product & interface**: turning vague ideas into interfaces people can actually click and use, with attention to detail and real-world use.
-- **Engineering & automation**: making repetitive work run by itself and keeping the toolchain pleasant.
+## Why this hall
 
-## Skills & tools
+Because a good photograph of a car is never just the car. It needs a little weather, a little timing, and a beam of light that happened to pass by.
 
-- Frontend: HTML / CSS / JavaScript
-- Tooling: Git, Node.js, Cloudflare
-- Other: writing in Markdown, basic design
+## How I shoot
 
-## Background
+- Natural light as much as possible; the hour around sunset is best
+- Keep the surroundings, skip the spotless studio look
+- Group every twelve frames into one series
 
-- **Now**: building small independent projects and writing regularly.
-- **Before**: worked on several products from zero to one.
-
-## Outside work
-
-Going for walks when the weather is good, and writing down what I notice.
-
-> If any of my projects interest you, leave a comment on the [blog](/en/blog/) or just [email me](mailto:hello@manfiah.win).
+> Want the photographs? Head to the [collection](/en/gallery/).

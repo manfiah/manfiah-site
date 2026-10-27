@@ -13,7 +13,7 @@ export const site = {
   url: "https://manfiah.win",
 
   /** 你的名字 / 昵称（会显示在标题和页脚） */
-  author: "Manfiah",
+  author: "manfiah",
 
   /** 头像图片路径：默认用 assets/avatar.svg，可换成 assets/avatar.jpg 后改这里 */
   avatar: "/assets/avatar.svg",
@@ -23,20 +23,20 @@ export const site = {
 
   /** 双语标题 */
   title: {
-    zh: "Manfiah · 个人主页与作品集",
-    en: "Manfiah · Portfolio",
+    zh: "manfiah · 个人网站",
+    en: "manfiah · Personal site",
   },
 
   /** 双语一句话简介（显示在首页大标题下） */
   tagline: {
-    zh: "把想法做成能用的东西。",
-    en: "Turning ideas into things people can use.",
+    zh: "车与光影之间的记录者。",
+    en: "Documenting cars, light and the space between.",
   },
 
   /** 双语 SEO 描述 */
   description: {
-    zh: "Manfiah 的个人主页：作品集、项目与博客。",
-    en: "Manfiah's personal site: portfolio, projects and blog.",
+    zh: "manfiah 的个人网站：汽车展览馆、摄影集与写作。",
+    en: "manfiah's personal site: car exhibition hall, photography collection and writing.",
   },
 
   /** 首页自我介绍段落（TODO 改成你的话） */
@@ -57,9 +57,9 @@ export const site = {
   /** 顶部导航（href 不用加语言前缀，构建时自动补 /zh/ 或 /en/） */
   nav: [
     { key: "home", href: "", zh: "首页", en: "Home" },
-    { key: "about", href: "about/", zh: "关于我", en: "About" },
-    { key: "projects", href: "projects/", zh: "作品集", en: "Projects" },
-    { key: "blog", href: "blog/", zh: "博客", en: "Blog" },
+    { key: "about", href: "about/", zh: "关于", en: "About" },
+    { key: "gallery", href: "gallery/", zh: "摄影集", en: "Gallery" },
+    { key: "blog", href: "blog/", zh: "博客", en: "Journal" },
   ],
 
   /** 页脚版权年份是否自动更新 */

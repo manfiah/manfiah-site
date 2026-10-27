@@ -1,6 +1,6 @@
 ---
 title: "Why I keep a bilingual personal site"
-date: 2025-10-12
+date: 2026-09-20
 tags: [writing, i18n, design]
 excerpt: "Bilingual is not just translating everything twice — it shapes your URL structure, your SEO and how you write."
 ---
