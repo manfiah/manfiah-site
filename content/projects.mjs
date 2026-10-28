@@ -25,15 +25,16 @@ export const projects = [
     tags: ["车", "日落", "胶片感"],
   },
   {
-    slug: "halls",
+    slug: "wuthering-waves",
+    dir: "wuthering-waves",
     year: 2026,
-    count: 8,
-    title: { zh: "展馆", en: "Halls" },
+    count: 60,
+    title: { zh: "鸣潮摄影", en: "Wuthering Waves" },
     summary: {
-      zh: "展厅里的车像被陈列的标本，安静、克制、有秩序。",
-      en: "Cars in a showroom feel like specimens: quiet, restrained, in order.",
+      zh: "在《鸣潮》里按下快门的那些瞬间：光、水汽，和远处的轮廓。",
+      en: "Frames captured in Wuthering Waves: light, mist and the far-off silhouettes.",
     },
-    tags: ["室内", "建筑", "光"],
+    tags: ["游戏摄影", "鸣潮", "风景"],
   },
   {
     slug: "roads",

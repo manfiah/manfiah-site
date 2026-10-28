@@ -37,7 +37,8 @@ const UI = {
     galleryLead: "每一个系列，都是一次关于光线的练习。",
     viewAll: "查看全部",
     galleryTitlePage: "摄影集",
-    galleryPageLead: "按系列整理的照片：车、展馆、公路与静物。",
+    galleryPageLead: "按系列整理的照片：车、鸣潮、公路与静物。",
+    backToGallery: "← 返回摄影集",
     seriesEyebrow: "04/ 系列",
     seriesTitle: "精选画面",
     tabs: ["全部", "展馆", "公路", "静物"],
@@ -81,7 +82,8 @@ const UI = {
     galleryLead: "Every series is a study of light.",
     viewAll: "View all",
     galleryTitlePage: "Photography Collection",
-    galleryPageLead: "Photographs arranged in series: cars, halls, roads and still lifes.",
+    galleryPageLead: "Photographs arranged in series: cars, mist, roads and still lifes.",
+    backToGallery: "← Back to collection",
     seriesEyebrow: "04/ Series",
     seriesTitle: "Selected frames",
     tabs: ["All", "Halls", "Roads", "Still"],
@@ -204,7 +206,7 @@ function gallerySection({ lang, series }) {
     .slice(0, 4)
     .map(
       (s, i) => `<li>
-        <a href="${href(lang, "gallery/")}">
+        <a href="${seriesHref(lang, s)}">
           <span class="cat-list__idx">0${i + 1}</span>
           <span class="cat-list__label">${escapeHtml(s.title[lang])}</span>
           <span class="cat-list__meta">${escapeHtml(String(s.year || ""))} · ${escapeHtml(
@@ -308,7 +310,7 @@ function galleryPage({ lang, series }) {
   const items = series
     .map(
       (s) => `<li class="series-item">
-      <a href="${href(lang, "gallery/")}">
+      <a href="${seriesHref(lang, s)}">
         <span class="series-item__title">${escapeHtml(s.title[lang])}</span>
         ${tagChips(s.tags)}
         <span class="series-item__meta">${escapeHtml(String(s.year || ""))} · ${escapeHtml(
@@ -328,6 +330,32 @@ function galleryPage({ lang, series }) {
   <ul class="series-list">
     ${items}
   </ul>
+</section>`;
+}
+
+function seriesPage({ lang, series }) {
+  const ui = UI[lang];
+  const photos = series.photos
+    .map(
+      (f, i) => `<a class="photo-item" href="/assets/${series.dir}/${f}" target="_blank" rel="noopener noreferrer">
+      <img src="/assets/${series.dir}/${f}" alt="${escapeHtml(series.title[lang])} ${i + 1}" loading="lazy" decoding="async">
+    </a>`,
+    )
+    .join("\n    ");
+
+  return `<section class="container">
+  <header class="page-head">
+    <p class="page-head__eyebrow">${escapeHtml(ui.galleryEyebrow)}</p>
+    <h1 class="page-head__title">${escapeHtml(series.title[lang])}</h1>
+    <div class="page-head__meta">
+      <span>${escapeHtml(series.summary[lang])}</span>
+      <span>${series.count} ${ui.seriesCount}</span>
+    </div>
+  </header>
+  <div class="photo-grid">
+    ${photos}
+  </div>
+  <p><a class="pill" href="${href(lang, "gallery/")}">${escapeHtml(ui.backToGallery)}</a></p>
 </section>`;
 }
 
@@ -392,9 +420,38 @@ function notFoundPage({ lang }) {
 }
 
 /* ---------------- 主流程 ---------------- */
+async function copyAssets(dir, relBase = "assets") {
+  const entries = await readdir(dir, { withFileTypes: true });
+  for (const entry of entries) {
+    const full = join(dir, entry.name);
+    const rel = `${relBase}/${entry.name}`;
+    if (entry.isDirectory()) {
+      await mkdir(join(DIST, rel), { recursive: true });
+      await copyAssets(full, rel);
+    } else {
+      await copyFile(full, join(DIST, rel));
+      written.push(rel);
+    }
+  }
+}
+
+function seriesHref(lang, s) {
+  return s.photos && s.photos.length ? href(lang, `gallery/${s.slug}/`) : href(lang, "gallery/");
+}
+
 async function build() {
   const projectsModule = await import("./content/projects.mjs");
   const series = projectsModule.projects ?? [];
+
+  // 带 dir 的系列：自动发现照片
+  for (const s of series) {
+    if (!s.dir) continue;
+    const dirPath = join(SRC, "assets", s.dir);
+    s.photos = existsSync(dirPath)
+      ? (await readdir(dirPath)).filter((f) => /\.(jpe?g|png|webp)$/i.test(f)).sort()
+      : [];
+    s.count = s.photos.length || s.count || 0;
+  }
 
   const aboutBody = {};
   const posts = {};
@@ -418,10 +475,7 @@ async function build() {
 
   const assetDir = join(SRC, "assets");
   if (existsSync(assetDir)) {
-    for (const file of await readdir(assetDir)) {
-      await copyFile(join(assetDir, file), join(DIST, "assets", file));
-      written.push(`assets/${file}`);
-    }
+    await copyAssets(assetDir);
   }
 
   // 根路径：语言选择
@@ -472,6 +526,24 @@ async function build() {
         altHref: alt("gallery/", "gallery/"),
       }),
     );
+
+    for (const s of series) {
+      if (!s.photos || !s.photos.length) continue;
+      await emit(
+        `${lang}/gallery/${s.slug}/index.html`,
+        renderDocument({
+          site,
+          lang,
+          active: "gallery",
+          title: s.title[lang],
+          description: s.summary[lang],
+          path: `gallery/${s.slug}/`,
+          bodyClass: "page-light",
+          content: seriesPage({ lang, series: s }),
+          altHref: alt(`gallery/${s.slug}/`, `gallery/${s.slug}/`),
+        }),
+      );
+    }
 
     await emit(
       `${lang}/blog/index.html`,
@@ -547,6 +619,9 @@ async function build() {
       `${site.url}${href(lang, "gallery/")}`,
       `${site.url}${href(lang, "blog/")}`,
     );
+    for (const s of series) {
+      if (s.photos && s.photos.length) urls.push(`${site.url}${href(lang, `gallery/${s.slug}/`)}`);
+    }
     for (const post of posts[lang]) urls.push(`${site.url}${href(lang, `blog/${post.slug}/`)}`);
   }
   const today = new Date().toISOString().slice(0, 10);

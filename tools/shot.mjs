@@ -98,6 +98,7 @@ const FREEZE = `(() => {
   document.head.appendChild(s);
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-in'));
   document.querySelectorAll('.hero__title .line > span').forEach(el => { el.style.transform = 'none'; });
+  document.querySelectorAll('img[loading="lazy"]').forEach(img => { img.loading = 'eager'; });
   window.scrollTo(0, 0);
 })();`;
 
@@ -144,7 +145,7 @@ async function main() {
     await cdp.send("Page.navigate", { url });
     await sleep(1800);
     await cdp.send("Runtime.evaluate", { expression: FREEZE, awaitPromise: false });
-    await sleep(900);
+    await sleep(2600);
     const { data } = await cdp.send("Page.captureScreenshot", {
       format: "png",
       captureBeyondViewport: true,
@@ -157,6 +158,7 @@ async function main() {
   await shot({ width: 390, height: 844, url: `http://127.0.0.1:${PORT}/zh/`, file: "shot-mobile.png", mobile: true });
   await shot({ width: 1440, height: 900, url: `http://127.0.0.1:${PORT}/`, file: "shot-root.png" });
   await shot({ width: 1440, height: 900, url: `http://127.0.0.1:${PORT}/zh/gallery/`, file: "shot-gallery.png" });
+  await shot({ width: 1440, height: 900, url: `http://127.0.0.1:${PORT}/zh/gallery/wuthering-waves/`, file: "shot-series.png" });
   await shot({ width: 1440, height: 900, url: `http://127.0.0.1:${PORT}/zh/about/`, file: "shot-about.png" });
   await shot({ width: 1440, height: 900, url: `http://127.0.0.1:${PORT}/zh/blog/hello-world/`, file: "shot-post.png" });
 

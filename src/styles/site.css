@@ -825,6 +825,35 @@ main > article.container { max-width: 1000px; }
   color: var(--ink-muted);
 }
 
+/* 摄影集详情：照片墙 */
+.photo-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  margin-bottom: clamp(48px, 8vh, 96px);
+}
+
+.photo-item {
+  display: block;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--paper-2);
+}
+
+.photo-item img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .9s var(--ease);
+}
+
+.photo-item:hover img { transform: scale(1.04); }
+
+@media (max-width: 640px) {
+  .photo-grid { grid-template-columns: 1fr; }
+}
+
 /* 评论 */
 .comments { margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--line-ink); }
 .comments__title {
