@@ -13,7 +13,7 @@ export const site = {
   url: "https://manfiah.win",
 
   /** 你的名字 / 昵称（会显示在标题和页脚） */
-  author: "manfiah",
+  author: "智明设计工作室",
 
   /** 头像图片路径：默认用 assets/avatar.svg，可换成 assets/avatar.jpg 后改这里 */
   avatar: "/assets/avatar.svg",
@@ -23,26 +23,26 @@ export const site = {
 
   /** 双语标题 */
   title: {
-    zh: "manfiah · 个人网站",
-    en: "manfiah · Personal site",
+    zh: "智明设计工作室 · 个人网站",
+    en: "智明设计工作室 · Personal site",
   },
 
   /** 双语一句话简介（显示在首页大标题下） */
   tagline: {
-    zh: "车与光影之间的记录者。",
-    en: "Documenting cars, light and the space between.",
+    zh: "设计 · 影像 · 文字。",
+    en: "Design · Images · Words.",
   },
 
   /** 双语 SEO 描述 */
   description: {
-    zh: "manfiah 的个人网站：汽车展览馆、摄影集与写作。",
-    en: "manfiah's personal site: car exhibition hall, photography collection and writing.",
+    zh: "智明设计工作室：汽车展览馆、摄影集与写作。",
+    en: "智明设计工作室: car exhibition hall, photography collection and writing.",
   },
 
   /** 首页自我介绍段落（TODO 改成你的话） */
   intro: {
-    zh: "你好，我是 Manfiah。这里放我做过的项目、写下的文章，以及联系方式。",
-    en: "Hi, I'm Manfiah. This is where I keep my projects, notes and ways to reach me.",
+    zh: "智明设计工作室：这里放我们做过的项目、写下的文章，以及联系方式。",
+    en: "Zhiming Design Studio: this is where we keep our projects, notes and ways to reach us.",
   },
 
   /**

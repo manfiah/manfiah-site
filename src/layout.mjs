@@ -138,7 +138,7 @@ function header({ site, lang, active, altHref }) {
 
   return `<header class="site-header" id="siteHeader">
   <div class="site-header__inner container">
-    <a class="brand" href="${href(lang)}" aria-label="manfiah"><img src="/assets/mark-256.jpg" alt="" width="26" height="26"><span>manfiah</span></a>
+    <a class="brand" href="${href(lang)}" aria-label="智明设计工作室"><img src="/assets/mark-256.jpg" alt="" width="26" height="26"><span>智明设计工作室</span></a>
 
     <nav class="nav" aria-label="${ui.nav}">
         ${links}
@@ -179,7 +179,7 @@ function footer({ site, lang }) {
   <div class="container">
     <div class="site-footer__grid">
       <div>
-        <a class="site-footer__brand" href="${href(lang)}"><img src="/assets/mark-256.jpg" alt="" width="24" height="24"><span>manfiah</span></a>
+        <a class="site-footer__brand" href="${href(lang)}"><img src="/assets/mark-256.jpg" alt="" width="24" height="24"><span>智明设计工作室</span></a>
         <p class="site-footer__note">${escapeHtml(site.tagline[lang])}</p>
       </div>
       <div>
@@ -322,7 +322,7 @@ ${head({
   <div class="chooser">
     <div class="chooser__inner">
       <img class="chooser__mark" src="/assets/mark-256.jpg" alt="" width="76" height="76">
-      <h1 class="chooser__title">manfiah</h1>
+      <h1 class="chooser__title">智明设计工作室</h1>
       <p class="chooser__sub">${escapeHtml(site.tagline.zh)} / ${escapeHtml(site.tagline.en)}</p>
       <div class="chooser__grid">
         <a class="chooser__card" href="/zh/">

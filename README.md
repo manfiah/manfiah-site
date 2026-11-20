@@ -1,4 +1,4 @@
-# manfiah.win — 个人网站
+# 智明设计工作室 · manfiah.win — 个人网站
 
 深色编辑风首页 + 浅色阅读页；零依赖静态站、中英双语、博客与评论。
 部署在 Cloudflare Pages（免费、自动 HTTPS、全球 CDN）。

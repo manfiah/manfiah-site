@@ -169,8 +169,8 @@ function hero({ lang }) {
   <div class="hero__inner container">
     <p class="hero__eyebrow">${escapeHtml(ui.heroEyebrow)}</p>
     <h1 class="hero__title">
-      <span class="line"><span>PERSONAL</span></span>
-      <span class="line"><span>WEBSITE</span></span>
+      <span class="line"><span>ZHIMING</span></span>
+      <span class="line"><span>DESIGN</span></span>
     </h1>
     <p class="hero__sub">${escapeHtml(ui.heroSub)}</p>
     <div class="hero__cta">
