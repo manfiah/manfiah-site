@@ -1,11 +1,12 @@
 /**
  * ============================================================
- *  摄影集 / 系列数据 —— TODO 换成你自己的照片系列
+ *  专栏 / 系列数据
  * ============================================================
  *  字段说明：
- *    slug    系列标识（英文，用于未来链接）
+ *    slug    系列标识（用于详情页网址）
+ *    dir     可选：照片目录名（src/assets/<dir>/），有照片才显示照片墙
  *    year    年份
- *    count   张数
+ *    count   张数（有 dir 时自动按目录内图片数计算）
  *    title   { zh: "中文名", en: "English name" }
  *    summary { zh: "中文描述", en: "English description" }
  *    tags    标签数组
@@ -14,13 +15,13 @@
 
 export const projects = [
   {
-    slug: "sunset-and-car",
+    slug: "vehicles",
     year: 2026,
     count: 12,
-    title: { zh: "日落与车", en: "Sunset & Car" },
+    title: { zh: "车辆", en: "Vehicles" },
     summary: {
-      zh: "傍晚六点之后的车与光：金属、玻璃、还有退到背景里的山。",
-      en: "Cars and light after six: metal, glass, and mountains fading into the background.",
+      zh: "日落前后的车与光：金属、玻璃，还有退到背景里的山。",
+      en: "Cars and light around sunset: metal, glass, and mountains fading behind.",
     },
     tags: ["车", "日落", "胶片感"],
   },
@@ -37,25 +38,36 @@ export const projects = [
     tags: ["游戏摄影", "鸣潮", "风景"],
   },
   {
-    slug: "roads",
+    slug: "landscapes",
     year: 2025,
     count: 16,
-    title: { zh: "公路", en: "Roads" },
+    title: { zh: "自然风光", en: "Landscapes" },
     summary: {
-      zh: "从一个目的地开往下一个目的地的途中，那些没打算拍下的画面。",
-      en: "The frames you never planned to take, on the way from one place to the next.",
+      zh: "山、海、云和光——路上看到的自然。",
+      en: "Mountains, sea, clouds and light — nature seen along the way.",
     },
-    tags: ["公路", "旅途", "风景"],
+    tags: ["自然", "风光", "摄影"],
   },
   {
-    slug: "still",
+    slug: "playlist",
     year: 2025,
-    count: 6,
-    title: { zh: "静物", en: "Still" },
+    count: 0,
+    title: { zh: "manfiah歌单", en: "manfiah Playlist" },
     summary: {
-      zh: "钥匙、方向盘、后视镜上的一小块反光。",
-      en: "Keys, steering wheels, a small reflection on the mirror.",
+      zh: "music so good, even devil may cry",
+      en: "music so good, even devil may cry",
     },
-    tags: ["静物", "细节"],
+    tags: ["歌单", "音乐"],
+  },
+  {
+    slug: "software",
+    year: 2026,
+    count: 0,
+    title: { zh: "软件设计", en: "Software Design" },
+    summary: {
+      zh: "占位中，资料稍后补上。",
+      en: "Placeholder — details coming soon.",
+    },
+    tags: ["软件", "设计"],
   },
 ];

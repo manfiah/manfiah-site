@@ -57,8 +57,8 @@ export const site = {
   /** 顶部导航（href 不用加语言前缀，构建时自动补 /zh/ 或 /en/） */
   nav: [
     { key: "home", href: "", zh: "首页", en: "Home" },
+    { key: "gallery", href: "gallery/", zh: "专栏", en: "Column" },
     { key: "about", href: "about/", zh: "关于", en: "About" },
-    { key: "gallery", href: "gallery/", zh: "摄影集", en: "Gallery" },
     { key: "blog", href: "blog/", zh: "博客", en: "Journal" },
   ],
 

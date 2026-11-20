@@ -24,25 +24,25 @@ const HERO_SET = `/assets/hero-960.jpg 960w, ${HERO} 1920w`;
 /* ---------------- 文案 ---------------- */
 const UI = {
   zh: {
-    heroEyebrow: "车 · 影像 · 文字",
+    heroEyebrow: "车 · 影像 · 工业设计 · 软件设计",
     heroSub: "这是枯萎中的绽放",
     explore: "Explore",
     aboutEyebrow: "01/ 关于",
     aboutTitle: "汽车展览馆",
-    aboutLead:
-      "一个把车、光与空间放在一起的地方。这里记录车辆、展览，以及那些只在傍晚才出现的颜色。",
+    aboutLead: "人类历史上集工业设计、材料学、信息技术的极致工业品。",
     moreAbout: "More about us",
-    galleryEyebrow: "02/ 摄影集",
+    galleryEyebrow: "02/ 专栏",
     galleryTitle: "为你的生活方式而造的空间",
     galleryLead: "每一个系列，都是一次关于光线的练习。",
     viewAll: "查看全部",
-    galleryTitlePage: "摄影集",
-    galleryPageLead: "按系列整理的照片：车、鸣潮、公路与静物。",
-    backToGallery: "← 返回摄影集",
+    galleryTitlePage: "专栏",
+    galleryPageLead: "按系列整理的内容：车辆、鸣潮、自然风光、歌单与软件设计。",
+    backToGallery: "← 返回专栏",
+    seriesPlaceholder: "这一栏还在整理，稍后补上。",
     seriesEyebrow: "04/ 系列",
     seriesTitle: "精选画面",
-    tabs: ["全部", "展馆", "公路", "静物"],
-    cardTitle: "日落与车",
+    tabs: ["车辆", "景物", "游戏"],
+    cardTitle: "车辆",
     cardMeta: "2026 · 12 张",
     cardCta: "查看",
     badge: "4.9 · 精选",
@@ -62,32 +62,33 @@ const UI = {
     backHome: "回到首页",
     aboutPageEyebrow: "01/ 关于",
     aboutPageLead: "关于这个空间、这些车，以及我为什么拍它们。",
-    aboutCta: "去看摄影集",
+    aboutCta: "去看专栏",
     seriesCount: "张",
     home: "首页",
     footerExplore: "浏览",
     footerConnect: "联系",
   },
   en: {
-    heroEyebrow: "Cars · Images · Words",
+    heroEyebrow: "Cars · Images · Industrial Design · Software Design",
     heroSub: "A bloom within the withering",
     explore: "Explore",
     aboutEyebrow: "01/ About",
     aboutTitle: "Car Exhibition Hall",
     aboutLead:
-      "A place where cars, light and space meet. Vehicles, exhibitions, and the colours that only appear near sunset.",
+      "The finest industrial product in human history — industrial design, materials science and information technology, pushed to their limits.",
     moreAbout: "More about us",
-    galleryEyebrow: "02/ Photography Collection",
+    galleryEyebrow: "02/ Column",
     galleryTitle: "Spaces crafted for the way you live",
     galleryLead: "Every series is a study of light.",
     viewAll: "View all",
-    galleryTitlePage: "Photography Collection",
-    galleryPageLead: "Photographs arranged in series: cars, mist, roads and still lifes.",
-    backToGallery: "← Back to collection",
+    galleryTitlePage: "Column",
+    galleryPageLead: "Content in series: vehicles, Wuthering Waves, landscapes, playlists and software design.",
+    backToGallery: "← Back to column",
+    seriesPlaceholder: "This column is still being put together — check back soon.",
     seriesEyebrow: "04/ Series",
     seriesTitle: "Selected frames",
-    tabs: ["All", "Halls", "Roads", "Still"],
-    cardTitle: "Sunset & Car",
+    tabs: ["Vehicles", "Scenery", "Games"],
+    cardTitle: "Vehicles",
     cardMeta: "2026 · 12 frames",
     cardCta: "View",
     badge: "4.9 · Selected",
@@ -107,7 +108,7 @@ const UI = {
     backHome: "Back home",
     aboutPageEyebrow: "01/ About",
     aboutPageLead: "About this space, these cars, and why I photograph them.",
-    aboutCta: "View the collection",
+    aboutCta: "View the column",
     seriesCount: "frames",
     home: "Home",
     footerExplore: "Explore",
@@ -203,15 +204,13 @@ function aboutSection({ lang }) {
 function gallerySection({ lang, series }) {
   const ui = UI[lang];
   const items = series
-    .slice(0, 4)
+    .slice(0, 5)
     .map(
       (s, i) => `<li>
         <a href="${seriesHref(lang, s)}">
           <span class="cat-list__idx">0${i + 1}</span>
           <span class="cat-list__label">${escapeHtml(s.title[lang])}</span>
-          <span class="cat-list__meta">${escapeHtml(String(s.year || ""))} · ${escapeHtml(
-            String(s.count || ""),
-          )} ${ui.seriesCount}</span>
+          <span class="cat-list__meta">${seriesMeta(s, ui)}</span>
         </a>
       </li>`,
     )
@@ -313,9 +312,7 @@ function galleryPage({ lang, series }) {
       <a href="${seriesHref(lang, s)}">
         <span class="series-item__title">${escapeHtml(s.title[lang])}</span>
         ${tagChips(s.tags)}
-        <span class="series-item__meta">${escapeHtml(String(s.year || ""))} · ${escapeHtml(
-          String(s.count || ""),
-        )} ${ui.seriesCount}</span>
+        <span class="series-item__meta">${seriesMeta(s, ui)}</span>
       </a>
     </li>`,
     )
@@ -335,13 +332,16 @@ function galleryPage({ lang, series }) {
 
 function seriesPage({ lang, series }) {
   const ui = UI[lang];
-  const photos = series.photos
-    .map(
-      (f, i) => `<a class="photo-item" href="/assets/${series.dir}/${f}" target="_blank" rel="noopener noreferrer">
+  const hasPhotos = series.photos && series.photos.length;
+  const photos = hasPhotos
+    ? series.photos
+        .map(
+          (f, i) => `<a class="photo-item" href="/assets/${series.dir}/${f}" target="_blank" rel="noopener noreferrer">
       <img src="/assets/${series.dir}/${f}" alt="${escapeHtml(series.title[lang])} ${i + 1}" loading="lazy" decoding="async">
     </a>`,
-    )
-    .join("\n    ");
+        )
+        .join("\n    ")
+    : "";
 
   return `<section class="container">
   <header class="page-head">
@@ -349,12 +349,16 @@ function seriesPage({ lang, series }) {
     <h1 class="page-head__title">${escapeHtml(series.title[lang])}</h1>
     <div class="page-head__meta">
       <span>${escapeHtml(series.summary[lang])}</span>
-      <span>${series.count} ${ui.seriesCount}</span>
+      ${series.count ? `<span>${series.count} ${ui.seriesCount}</span>` : ""}
     </div>
   </header>
-  <div class="photo-grid">
+  ${
+    hasPhotos
+      ? `<div class="photo-grid">
     ${photos}
-  </div>
+  </div>`
+      : `<div class="placeholder-note"><p>${escapeHtml(ui.seriesPlaceholder)}</p></div>`
+  }
   <p><a class="pill" href="${href(lang, "gallery/")}">${escapeHtml(ui.backToGallery)}</a></p>
 </section>`;
 }
@@ -436,7 +440,14 @@ async function copyAssets(dir, relBase = "assets") {
 }
 
 function seriesHref(lang, s) {
-  return s.photos && s.photos.length ? href(lang, `gallery/${s.slug}/`) : href(lang, "gallery/");
+  return href(lang, `gallery/${s.slug}/`);
+}
+
+function seriesMeta(s, ui) {
+  const parts = [];
+  if (s.year) parts.push(String(s.year));
+  if (s.count) parts.push(`${s.count} ${ui.seriesCount}`);
+  return escapeHtml(parts.join(" · "));
 }
 
 async function build() {
@@ -528,7 +539,6 @@ async function build() {
     );
 
     for (const s of series) {
-      if (!s.photos || !s.photos.length) continue;
       await emit(
         `${lang}/gallery/${s.slug}/index.html`,
         renderDocument({
@@ -620,7 +630,7 @@ async function build() {
       `${site.url}${href(lang, "blog/")}`,
     );
     for (const s of series) {
-      if (s.photos && s.photos.length) urls.push(`${site.url}${href(lang, `gallery/${s.slug}/`)}`);
+      urls.push(`${site.url}${href(lang, `gallery/${s.slug}/`)}`);
     }
     for (const post of posts[lang]) urls.push(`${site.url}${href(lang, `blog/${post.slug}/`)}`);
   }
